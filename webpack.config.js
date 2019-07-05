@@ -2,10 +2,12 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: "./src/widget.tsx",
     output: {
         filename: "widget.js",
         path: path.resolve(__dirname, "dist"),
+        library: "BreezeWidget",
+        libraryTarget: "var",
     },
     module: {
         rules: [
