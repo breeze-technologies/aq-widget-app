@@ -4,6 +4,7 @@ import { WidgetConfig } from "./models/config";
 import { DEFAULT_WIDGET_CONFIG } from "./defaults";
 import * as logging from "./utils/logging";
 import { isValidDataSource } from "./utils/validators";
+import "./style/widget.css";
 
 export function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
     if (!WidgetConfig) {
@@ -35,6 +36,14 @@ export function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
         logging.error(`No sensor identifier "${sensorIdentifier}" given.`);
         return;
     }
-
-    element.innerHTML = '<div style="width:100%;height:100px;background:#2fc3ff;border-radius:4px;"></div>';
+    element.classList.add("brzt-widget");
+    element.innerHTML =
+        '<div class="brzt-widget-container">' +
+        '<span class="brzt-widget-particle-1"></span>' +
+        '<span class="brzt-widget-particle-2"></span>' +
+        '<span class="brzt-widget-particle-3"></span>' +
+        '<p class="brzt-widget-index">EU Common Air Quality Index</p>' +
+        '<p class="brzt-widget-score">excellent</p>' +
+        '<p class="brzt-widget-location">Hamburg, Germany</p>' +
+        "</div>";
 }

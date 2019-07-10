@@ -1,0 +1,143 @@
+/*** RESET ***/
+
+.brzt-widget,
+.brzt-widget div,
+.brzt-widget span,
+.brzt-widget applet,
+.brzt-widget object,
+.brzt-widget iframe,
+.brzt-widget h1,
+.brzt-widget h2,
+.brzt-widget h3,
+.brzt-widget h4,
+.brzt-widget h5,
+.brzt-widget h6,
+.brzt-widget p,
+.brzt-widget blockquote,
+.brzt-widget pre,
+.brzt-widget a,
+.brzt-widget abbr,
+.brzt-widget acronym,
+.brzt-widget address,
+.brzt-widget big,
+.brzt-widget cite,
+.brzt-widget code,
+.brzt-widget del,
+.brzt-widget dfn,
+.brzt-widget em,
+.brzt-widget font,
+.brzt-widget img,
+.brzt-widget ins,
+.brzt-widget kbd,
+.brzt-widget q,
+.brzt-widget s,
+.brzt-widget samp,
+.brzt-widget small,
+.brzt-widget strike,
+.brzt-widget strong,
+.brzt-widget sub,
+.brzt-widget sup,
+.brzt-widget tt,
+.brzt-widget var,
+.brzt-widget dl,
+.brzt-widget dt,
+.brzt-widget dd,
+.brzt-widget ol,
+.brzt-widget ul,
+.brzt-widget li,
+.brzt-widget fieldset,
+.brzt-widget form,
+.brzt-widget label,
+.brzt-widget legend,
+.brzt-widget table,
+.brzt-widget caption,
+.brzt-widget tbody,
+.brzt-widget tfoot,
+.brzt-widget thead,
+.brzt-widget tr,
+.brzt-widget th,
+.brzt-widget td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+.brzt-widget :focus {
+    outline: 0;
+}
+
+/*** WIDGET ***/
+
+.brzt-widget {
+}
+
+.brzt-widget .brzt-widget-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 500px !important;
+    min-height: 100px !important;
+    border-radius: 4px;
+    background-color: #2fc3ff;
+    overflow: auto;
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-index {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-score {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 30px 0 0 10px;
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-location {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 2px 0 0 10px;
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-particle-1 {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 40px;
+    right: 90px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-particle-2 {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 50px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-particle-3 {
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 6px;
+    right: 44px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+}
