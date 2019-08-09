@@ -67,6 +67,8 @@
     font-family: inherit;
     vertical-align: baseline;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 .brzt-widget :focus {
     outline: 0;
