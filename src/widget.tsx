@@ -23,6 +23,7 @@ class AQWidget {
 
     private isLoading: boolean;
     private isInitialized: boolean;
+    private isInfoOpened: boolean;
 
     constructor(config: WidgetConfig) {
         this.widgetConfig = config;
@@ -32,6 +33,7 @@ class AQWidget {
 
         this.isLoading = true;
         this.isInitialized = false;
+        this.isInfoOpened = true;
     }
 
     public async initialize() {
@@ -101,6 +103,7 @@ class AQWidget {
     }
 
     private renderInContainer(inner: string, background: string, showParticles = false) {
+        const infoLinkId = "brzt-widget-info-link-" + Math.random() * 10000;
         this.htmlElement.innerHTML =
             '<div class="brzt-widget-container brzt-widget-' +
             background +
@@ -111,11 +114,29 @@ class AQWidget {
                   '<span class="brzt-widget-particle-3"></span>'
                 : "") +
             inner +
+            '<span id="' +
+            infoLinkId +
+            '" class="brzt-widget-info-icon">i</span>' +
+            (this.isInfoOpened ? this.renderInfo() : "") +
             "</div>";
+        this.attachHtmlListener(infoLinkId, "click", this.toggleInfo.bind(this));
+    }
+
+    private renderInfo() {
+        return '<div class="brzt-widget-info-box"><p>This application has been developed within the EOVALUE project, which has received funding from the European Union’s Horizon 2020 research and innovation programme. The JRC, or as the case may be the European Commission, shall not be held liable for any direct or indirect, incidental, consequential or other damages, including but not limited to the loss of data, loss of profits, or any other financial loss arising from the use of this application, or inability to use it, even if the JRC is notified of the possibility of such damages.</p></div>';
     }
 
     private obtainHtmlElement() {
         this.htmlElement = document.getElementById(this.widgetConfig.elementId);
+    }
+
+    private attachHtmlListener(elementId: string, type: string, listener: () => {}) {
+        document.getElementById(elementId).addEventListener(type, listener);
+    }
+
+    private toggleInfo() {
+        this.isInfoOpened = !this.isInfoOpened;
+        this.render();
     }
 
     private register() {

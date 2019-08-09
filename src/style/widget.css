@@ -140,6 +140,46 @@
     margin: 2px 0 0 10px;
 }
 
+.brzt-widget .brzt-widget-info-icon {
+    display: block;
+    position: absolute;
+    color: #fff;
+    width: 14px;
+    height: 14px;
+    bottom: 4px;
+    right: 4px;
+    border-radius: 7px;
+    border: 1px solid #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
+    font-family: Times, serif;
+    cursor: pointer;
+}
+
+.brzt-widget .brzt-widget-info-box {
+    position: absolute;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    padding: 12px 8px;
+    left: 4px;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: #fff;
+    overflow: scroll;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+.brzt-widget .brzt-widget-info-box p{
+    text-align: justify;
+}
+
 .brzt-widget .brzt-widget-container .brzt-widget-particle-1 {
     display: block;
     position: absolute;
