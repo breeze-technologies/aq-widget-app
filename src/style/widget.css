@@ -86,11 +86,40 @@
     max-width: 500px !important;
     min-height: 100px !important;
     border-radius: 4px;
-    background-color: #2fc3ff;
+    background-color: #fff;
     overflow: auto;
 }
 
+.brzt-widget .brzt-widget-container.brzt-widget-neutral {
+    background-color: #b1b1b1;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-excellent {
+    background-color: #2fc3ff;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-fine {
+    background-color: #3ea5e6;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-moderate {
+    background-color: #4d87cd;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-poor {
+    background-color: #5c6ab4;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-very-poor {
+    background-color: #c773c1;
+}
+.brzt-widget .brzt-widget-container.brzt-widget-severe {
+    background-color: #7a2f83;
+}
+
 .brzt-widget .brzt-widget-container .brzt-widget-index {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+
+.brzt-widget .brzt-widget-container .brzt-widget-warning {
     font-size: 10px;
     text-transform: uppercase;
     color: #fff;
@@ -120,6 +149,10 @@
     right: 90px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.2);
+    animation: ParticleMove1 30s ease infinite;
+    -webkit-animation: ParticleMove1 30s ease infinite;
+    animation-direction: alternate;
+    will-change: transform;
 }
 
 .brzt-widget .brzt-widget-container .brzt-widget-particle-2 {
@@ -127,10 +160,14 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    top: 10px;
-    right: 50px;
+    top: 28px;
+    right: 70px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.5);
+    animation: ParticleMove2 30s ease infinite;
+    -webkit-animation: ParticleMove2 30s ease infinite;
+    animation-direction: alternate;
+    will-change: transform;
 }
 
 .brzt-widget .brzt-widget-container .brzt-widget-particle-3 {
@@ -138,8 +175,39 @@
     position: absolute;
     width: 12px;
     height: 12px;
-    top: 6px;
-    right: 44px;
+    top: 15px;
+    right: 46px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.8);
+    animation: ParticleMove3 30s ease infinite;
+    -webkit-animation: ParticleMove3 30s ease infinite;
+    animation-direction: alternate;
+    will-change: transform;
+}
+
+@keyframes ParticleMove1 {
+    from {
+        transform: translate(50px, -38px);
+    }
+    to {
+        transform: translate(0px, 0px) rotate(90deg);
+    }
+}
+
+@keyframes ParticleMove2 {
+    from {
+        transform: translate(30px, -22px);
+    }
+    to {
+        transform: translate(0px, 0px) rotate(90deg);
+    }
+}
+
+@keyframes ParticleMove3 {
+    from {
+        transform: translate(5px, -7px);
+    }
+    to {
+        transform: translate(0px, 0px) rotate(90deg);
+    }
 }
