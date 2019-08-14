@@ -88,6 +88,11 @@
     border-radius: 4px;
     background-color: #fff;
     overflow: auto;
+    background-image: radial-gradient(
+        circle 150px at 80% 0%,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0)
+    );
 }
 
 .brzt-widget .brzt-widget-container.brzt-widget-neutral {
@@ -176,7 +181,7 @@
     font-size: 11px;
 }
 
-.brzt-widget .brzt-widget-info-box p{
+.brzt-widget .brzt-widget-info-box p {
     text-align: justify;
 }
 
@@ -186,7 +191,7 @@
     width: 40px;
     height: 40px;
     top: 40px;
-    right: 90px;
+    right: 140px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.2);
     animation: ParticleMove1 30s ease infinite;
@@ -201,7 +206,7 @@
     width: 20px;
     height: 20px;
     top: 28px;
-    right: 70px;
+    right: 120px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.5);
     animation: ParticleMove2 30s ease infinite;
@@ -216,7 +221,7 @@
     width: 12px;
     height: 12px;
     top: 15px;
-    right: 46px;
+    right: 96px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.8);
     animation: ParticleMove3 30s ease infinite;
