@@ -5,4 +5,5 @@ export const DEFAULT_WIDGET_CONFIG: WidgetConfig = {
     location: null,
     elementId: "breeze-widget",
     apiBase: "http://localhost:3000",
+    iconUrl: null,
 };

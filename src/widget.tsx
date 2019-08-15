@@ -33,7 +33,7 @@ class AQWidget {
 
         this.isLoading = true;
         this.isInitialized = false;
-        this.isInfoOpened = true;
+        this.isInfoOpened = false;
     }
 
     public async initialize() {
@@ -88,9 +88,11 @@ class AQWidget {
         const locationString = formatLocation(station.location);
         const aqiString = formatScore(station.measurements);
         const aqiScore = getScore(station.measurements);
+        const iconId = "brzt-widget-logo-icon-" + Math.random() * 10000;
+        const iconElement = this.renderIcon(iconId);
 
         const background = aqiScore < 0 ? "neutral" : aqiString.replace(" ", "-");
-        const showParticles = aqiScore < 2;
+        const showParticles = aqiScore < 2 && aqiScore >= 0;
         const content =
             '<p class="brzt-widget-index">EU Common Air Quality Index</p>' +
             '<p class="brzt-widget-score">' +
@@ -98,8 +100,12 @@ class AQWidget {
             "</p>" +
             '<p class="brzt-widget-location">' +
             locationString +
-            "</p>";
+            "</p>" +
+            iconElement;
         this.renderInContainer(content, background, showParticles);
+        if (iconElement) {
+            this.attachIconUrl(iconId, this.widgetConfig.iconUrl);
+        }
     }
 
     private renderInContainer(inner: string, background: string, showParticles = false) {
@@ -126,12 +132,24 @@ class AQWidget {
         return '<div class="brzt-widget-info-box"><p>This application has been developed within the EOVALUE project, which has received funding from the European Union’s Horizon 2020 research and innovation programme. The JRC, or as the case may be the European Commission, shall not be held liable for any direct or indirect, incidental, consequential or other damages, including but not limited to the loss of data, loss of profits, or any other financial loss arising from the use of this application, or inability to use it, even if the JRC is notified of the possibility of such damages.</p></div>';
     }
 
+    private renderIcon(iconId: string) {
+        const iconUrl = this.widgetConfig.iconUrl;
+        if (iconUrl) {
+            return '<div class="brzt-widget-logo-icon" id="' + iconId + '"></div>';
+        }
+        return "";
+    }
+
     private obtainHtmlElement() {
         this.htmlElement = document.getElementById(this.widgetConfig.elementId);
     }
 
     private attachHtmlListener(elementId: string, type: string, listener: () => {}) {
         document.getElementById(elementId).addEventListener(type, listener);
+    }
+
+    private attachIconUrl(elementId: string, iconUrl: string) {
+        document.getElementById(elementId).style.backgroundImage = "url('" + iconUrl + "')";
     }
 
     private toggleInfo() {

@@ -5,4 +5,5 @@ export interface WidgetConfig {
     location: Location;
     elementId: string;
     apiBase: string;
+    iconUrl: string;
 }

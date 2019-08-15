@@ -88,11 +88,7 @@
     border-radius: 4px;
     background-color: #fff;
     overflow: auto;
-    background-image: radial-gradient(
-        circle 150px at 80% 0%,
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0)
-    );
+    background-image: radial-gradient(circle 150px at 80% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
 .brzt-widget .brzt-widget-container.brzt-widget-neutral {
@@ -163,6 +159,21 @@
     line-height: 15px;
     font-family: Times, serif;
     cursor: pointer;
+}
+
+.brzt-widget .brzt-widget-logo-icon {
+    position: absolute;
+    display: block;
+    width: 80px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    background-color: rgba(255,255,255,0.15);
+    background-origin: content-box;
 }
 
 .brzt-widget .brzt-widget-info-box {

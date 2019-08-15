@@ -40,7 +40,14 @@
                         [16.528059990999996, 47.839989999465924],
                         [17.9126, 44.19899993999999],
                         [15, 45],
-                        [24.739078,41.694242]
+                        [24.739078, 41.694242],
+                        [11.4257541, 48.7665351],
+                        [7.593275, 47.566634],
+                    ];
+                    const iconUrls = [
+                        null,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/DEU_Hamburg_COA.svg/220px-DEU_Hamburg_COA.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Coat_of_arms_of_Berlin.svg/2000px-Coat_of_arms_of_Berlin.svg.png",
                     ];
                     const locationCount = locations.length;
                     const sidebar = document.getElementById("sidebar");
@@ -49,6 +56,7 @@
                         BreezeWidget.createSingleSensorWidget({
                             location: { longitude: locations[i][0], latitude: locations[i][1] },
                             elementId: "breeze_widget_" + i,
+                            iconUrl: iconUrls[i % iconUrls.length],
                         });
                     }
                 </script>
