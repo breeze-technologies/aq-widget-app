@@ -6,7 +6,7 @@ module.exports = {
     output: {
         filename: "widget.js",
         path: path.resolve(__dirname, "dist"),
-        library: "BreezeWidget",
+        library: "AQWidget",
         libraryTarget: "var",
     },
     module: {

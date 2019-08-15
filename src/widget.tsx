@@ -29,7 +29,7 @@ class AQWidget {
         this.widgetConfig = config;
         this.stationService = new StationService(this.widgetConfig.apiBase);
         this.obtainHtmlElement();
-        this.htmlElement.classList.add("brzt-widget");
+        this.htmlElement.classList.add("aq-widget");
 
         this.isLoading = true;
         this.isInitialized = false;
@@ -75,12 +75,12 @@ class AQWidget {
         const station = this.station;
 
         if (this.isLoading) {
-            const content = '<p class="brzt-widget-warning">Loading...</p>';
+            const content = '<p class="aq-widget-warning">Loading...</p>';
             this.renderInContainer(content, "neutral");
             return;
         }
         if (!this.isLoading && !this.isInitialized) {
-            const content = '<p class="brzt-widget-warning">No air quality station available...</p>';
+            const content = '<p class="aq-widget-warning">No air quality station available...</p>';
             this.renderInContainer(content, "neutral");
             return;
         }
@@ -88,17 +88,17 @@ class AQWidget {
         const locationString = formatLocation(station.location);
         const aqiString = formatScore(station.measurements);
         const aqiScore = getScore(station.measurements);
-        const iconId = "brzt-widget-logo-icon-" + Math.random() * 10000;
+        const iconId = "aq-widget-logo-icon-" + Math.random() * 10000;
         const iconElement = this.renderIcon(iconId);
 
         const background = aqiScore < 0 ? "neutral" : aqiString.replace(" ", "-");
         const showParticles = aqiScore < 2 && aqiScore >= 0;
         const content =
-            '<p class="brzt-widget-index">EU Common Air Quality Index</p>' +
-            '<p class="brzt-widget-score">' +
+            '<p class="aq-widget-index">EU Common Air Quality Index</p>' +
+            '<p class="aq-widget-score">' +
             aqiString +
             "</p>" +
-            '<p class="brzt-widget-location">' +
+            '<p class="aq-widget-location">' +
             locationString +
             "</p>" +
             iconElement;
@@ -109,33 +109,33 @@ class AQWidget {
     }
 
     private renderInContainer(inner: string, background: string, showParticles = false) {
-        const infoLinkId = "brzt-widget-info-link-" + Math.random() * 10000;
+        const infoLinkId = "aq-widget-info-link-" + Math.random() * 10000;
         this.htmlElement.innerHTML =
-            '<div class="brzt-widget-container brzt-widget-' +
+            '<div class="aq-widget-container aq-widget-' +
             background +
             '">' +
             (showParticles
-                ? '<span class="brzt-widget-particle-1"></span>' +
-                  '<span class="brzt-widget-particle-2"></span>' +
-                  '<span class="brzt-widget-particle-3"></span>'
+                ? '<span class="aq-widget-particle-1"></span>' +
+                  '<span class="aq-widget-particle-2"></span>' +
+                  '<span class="aq-widget-particle-3"></span>'
                 : "") +
             inner +
             '<span id="' +
             infoLinkId +
-            '" class="brzt-widget-info-icon">i</span>' +
+            '" class="aq-widget-info-icon">i</span>' +
             (this.isInfoOpened ? this.renderInfo() : "") +
             "</div>";
         this.attachHtmlListener(infoLinkId, "click", this.toggleInfo.bind(this));
     }
 
     private renderInfo() {
-        return '<div class="brzt-widget-info-box"><p>This application has been developed within the EOVALUE project, which has received funding from the European Union’s Horizon 2020 research and innovation programme. The JRC, or as the case may be the European Commission, shall not be held liable for any direct or indirect, incidental, consequential or other damages, including but not limited to the loss of data, loss of profits, or any other financial loss arising from the use of this application, or inability to use it, even if the JRC is notified of the possibility of such damages.</p></div>';
+        return '<div class="aq-widget-info-box"><p>This application has been developed within the EOVALUE project, which has received funding from the European Union’s Horizon 2020 research and innovation programme. The JRC, or as the case may be the European Commission, shall not be held liable for any direct or indirect, incidental, consequential or other damages, including but not limited to the loss of data, loss of profits, or any other financial loss arising from the use of this application, or inability to use it, even if the JRC is notified of the possibility of such damages.</p></div>';
     }
 
     private renderIcon(iconId: string) {
         const iconUrl = this.widgetConfig.iconUrl;
         if (iconUrl) {
-            return '<div class="brzt-widget-logo-icon" id="' + iconId + '"></div>';
+            return '<div class="aq-widget-logo-icon" id="' + iconId + '"></div>';
         }
         return "";
     }

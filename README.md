@@ -1,1 +1,1 @@
-# Breeze AQI Widget
+# Air Quality Widget

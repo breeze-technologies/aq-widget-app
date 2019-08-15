@@ -1,4 +1,4 @@
-const loggingPrefix = "[BreezeWidget]";
+const loggingPrefix = "[AQWidget]";
 
 export function error(...args: any[]){
     console.error(loggingPrefix, ...args)

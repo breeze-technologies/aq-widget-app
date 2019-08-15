@@ -1,62 +1,62 @@
 /*** RESET ***/
 
-.brzt-widget,
-.brzt-widget div,
-.brzt-widget span,
-.brzt-widget applet,
-.brzt-widget object,
-.brzt-widget iframe,
-.brzt-widget h1,
-.brzt-widget h2,
-.brzt-widget h3,
-.brzt-widget h4,
-.brzt-widget h5,
-.brzt-widget h6,
-.brzt-widget p,
-.brzt-widget blockquote,
-.brzt-widget pre,
-.brzt-widget a,
-.brzt-widget abbr,
-.brzt-widget acronym,
-.brzt-widget address,
-.brzt-widget big,
-.brzt-widget cite,
-.brzt-widget code,
-.brzt-widget del,
-.brzt-widget dfn,
-.brzt-widget em,
-.brzt-widget font,
-.brzt-widget img,
-.brzt-widget ins,
-.brzt-widget kbd,
-.brzt-widget q,
-.brzt-widget s,
-.brzt-widget samp,
-.brzt-widget small,
-.brzt-widget strike,
-.brzt-widget strong,
-.brzt-widget sub,
-.brzt-widget sup,
-.brzt-widget tt,
-.brzt-widget var,
-.brzt-widget dl,
-.brzt-widget dt,
-.brzt-widget dd,
-.brzt-widget ol,
-.brzt-widget ul,
-.brzt-widget li,
-.brzt-widget fieldset,
-.brzt-widget form,
-.brzt-widget label,
-.brzt-widget legend,
-.brzt-widget table,
-.brzt-widget caption,
-.brzt-widget tbody,
-.brzt-widget tfoot,
-.brzt-widget thead,
-.brzt-widget tr,
-.brzt-widget th,
-.brzt-widget td {
+.aq-widget,
+.aq-widget div,
+.aq-widget span,
+.aq-widget applet,
+.aq-widget object,
+.aq-widget iframe,
+.aq-widget h1,
+.aq-widget h2,
+.aq-widget h3,
+.aq-widget h4,
+.aq-widget h5,
+.aq-widget h6,
+.aq-widget p,
+.aq-widget blockquote,
+.aq-widget pre,
+.aq-widget a,
+.aq-widget abbr,
+.aq-widget acronym,
+.aq-widget address,
+.aq-widget big,
+.aq-widget cite,
+.aq-widget code,
+.aq-widget del,
+.aq-widget dfn,
+.aq-widget em,
+.aq-widget font,
+.aq-widget img,
+.aq-widget ins,
+.aq-widget kbd,
+.aq-widget q,
+.aq-widget s,
+.aq-widget samp,
+.aq-widget small,
+.aq-widget strike,
+.aq-widget strong,
+.aq-widget sub,
+.aq-widget sup,
+.aq-widget tt,
+.aq-widget var,
+.aq-widget dl,
+.aq-widget dt,
+.aq-widget dd,
+.aq-widget ol,
+.aq-widget ul,
+.aq-widget li,
+.aq-widget fieldset,
+.aq-widget form,
+.aq-widget label,
+.aq-widget legend,
+.aq-widget table,
+.aq-widget caption,
+.aq-widget tbody,
+.aq-widget tfoot,
+.aq-widget thead,
+.aq-widget tr,
+.aq-widget th,
+.aq-widget td {
     margin: 0;
     padding: 0;
     border: 0;
@@ -70,16 +70,16 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
-.brzt-widget :focus {
+.aq-widget :focus {
     outline: 0;
 }
 
 /*** WIDGET ***/
 
-.brzt-widget {
+.aq-widget {
 }
 
-.brzt-widget .brzt-widget-container {
+.aq-widget .aq-widget-container {
     position: relative;
     display: block;
     width: 100%;
@@ -91,57 +91,57 @@
     background-image: radial-gradient(circle 150px at 80% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
-.brzt-widget .brzt-widget-container.brzt-widget-neutral {
+.aq-widget .aq-widget-container.aq-widget-neutral {
     background-color: #b1b1b1;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-excellent {
+.aq-widget .aq-widget-container.aq-widget-excellent {
     background-color: #2fc3ff;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-fine {
+.aq-widget .aq-widget-container.aq-widget-fine {
     background-color: #3ea5e6;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-moderate {
+.aq-widget .aq-widget-container.aq-widget-moderate {
     background-color: #4d87cd;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-poor {
+.aq-widget .aq-widget-container.aq-widget-poor {
     background-color: #5c6ab4;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-very-poor {
+.aq-widget .aq-widget-container.aq-widget-very-poor {
     background-color: #c773c1;
 }
-.brzt-widget .brzt-widget-container.brzt-widget-severe {
+.aq-widget .aq-widget-container.aq-widget-severe {
     background-color: #7a2f83;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-index {
+.aq-widget .aq-widget-container .aq-widget-index {
     font-size: 10px;
     text-transform: uppercase;
     color: #fff;
     margin: 10px 0 0 10px;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-warning {
+.aq-widget .aq-widget-container .aq-widget-warning {
     font-size: 10px;
     text-transform: uppercase;
     color: #fff;
     margin: 10px 0 0 10px;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-score {
+.aq-widget .aq-widget-container .aq-widget-score {
     font-size: 25px;
     text-transform: uppercase;
     color: #fff;
     margin: 30px 0 0 10px;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-location {
+.aq-widget .aq-widget-container .aq-widget-location {
     font-size: 10px;
     text-transform: uppercase;
     color: #fff;
     margin: 2px 0 0 10px;
 }
 
-.brzt-widget .brzt-widget-info-icon {
+.aq-widget .aq-widget-info-icon {
     display: block;
     position: absolute;
     color: #fff;
@@ -161,7 +161,7 @@
     cursor: pointer;
 }
 
-.brzt-widget .brzt-widget-logo-icon {
+.aq-widget .aq-widget-logo-icon {
     position: absolute;
     display: block;
     width: 80px;
@@ -176,7 +176,7 @@
     background-origin: content-box;
 }
 
-.brzt-widget .brzt-widget-info-box {
+.aq-widget .aq-widget-info-box {
     position: absolute;
     z-index: 1000;
     width: auto;
@@ -192,11 +192,11 @@
     font-size: 11px;
 }
 
-.brzt-widget .brzt-widget-info-box p {
+.aq-widget .aq-widget-info-box p {
     text-align: justify;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-particle-1 {
+.aq-widget .aq-widget-container .aq-widget-particle-1 {
     display: block;
     position: absolute;
     width: 40px;
@@ -211,7 +211,7 @@
     will-change: transform;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-particle-2 {
+.aq-widget .aq-widget-container .aq-widget-particle-2 {
     display: block;
     position: absolute;
     width: 20px;
@@ -226,7 +226,7 @@
     will-change: transform;
 }
 
-.brzt-widget .brzt-widget-container .brzt-widget-particle-3 {
+.aq-widget .aq-widget-container .aq-widget-particle-3 {
     display: block;
     position: absolute;
     width: 12px;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Breeze Widget Test</title>
+        <title>AQ Widget Test</title>
         <style type="text/css">
             body {
                 background: #ccc;
@@ -30,9 +30,8 @@
     </head>
     <body>
         <div id="wrapper">
-            <h1>Breeze Widget Test</h1>
+            <h1>AQ Widget Test</h1>
             <aside id="sidebar">
-                <div id="breeze_widget"></div>
                 <script src="widget.js"></script>
                 <script>
                     const locations = [
@@ -52,10 +51,10 @@
                     const locationCount = locations.length;
                     const sidebar = document.getElementById("sidebar");
                     for (let i = 0; i < locationCount; i++) {
-                        sidebar.innerHTML = sidebar.innerHTML + '<div id="breeze_widget_' + i + '"></div><br>';
-                        BreezeWidget.createSingleSensorWidget({
+                        sidebar.innerHTML = sidebar.innerHTML + '<div id="aq_widget_' + i + '"></div><br>';
+                        AQWidget.createSingleSensorWidget({
                             location: { longitude: locations[i][0], latitude: locations[i][1] },
-                            elementId: "breeze_widget_" + i,
+                            elementId: "aq_widget_" + i,
                             iconUrl: iconUrls[i % iconUrls.length],
                         });
                     }
