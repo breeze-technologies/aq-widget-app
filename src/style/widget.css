@@ -76,9 +76,6 @@
 
 /*** WIDGET ***/
 
-.aq-widget {
-}
-
 .aq-widget .aq-widget-container {
     position: relative;
     display: block;
@@ -202,6 +199,8 @@
 .aq-widget .aq-widget-info-box p {
     text-align: justify;
 }
+
+/*** PARTICLES ***/
 
 .aq-widget .aq-widget-container .aq-widget-particle-1 {
     display: block;
