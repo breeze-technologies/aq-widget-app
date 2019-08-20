@@ -30,6 +30,9 @@ export function formatScore(measurements: Measurement[]) {
 }
 
 export function getScore(measurements: Measurement[]) {
+    if (!measurements) {
+        return -1;
+    }
     const aqi = measurements.find((m) => m.indicator === "eea_aqi");
     if (!aqi) {
         return -1;

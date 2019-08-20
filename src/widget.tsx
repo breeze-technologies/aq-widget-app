@@ -1,5 +1,5 @@
 "use strict";
-
+import { render, h, Component } from "preact";
 import { WidgetConfig } from "./models/config";
 import { DEFAULT_WIDGET_CONFIG } from "./defaults";
 import * as logging from "./utils/logging";
@@ -9,152 +9,141 @@ import "./style/widget.css";
 import { StationService } from "./services/stations";
 import { StationLookupResult, Station } from "./models/station";
 import { formatLocation, formatScore, getScore } from "./utils/formatters";
+import { JRC_NOTICE } from "./constants";
 
 const REGISTERED_WIDGETS = [];
 
-class AQWidget {
+/** Instruct Babel to compile JSX **/
+/** @jsx h */
+
+interface AqWidgetState {
+    stationLookupResult: StationLookupResult;
+    station: Station;
+    isLoading: boolean;
+    isInitialized: boolean;
+    isInfoOpened: boolean;
+}
+
+class AQWidget extends Component<WidgetConfig, AqWidgetState> {
     private intervalObj: any;
     private stationService: StationService;
-    private widgetConfig: WidgetConfig;
-    private htmlElement: HTMLElement;
 
-    private stationLookupResult: StationLookupResult;
-    private station: Station;
-
-    private isLoading: boolean;
-    private isInitialized: boolean;
-    private isInfoOpened: boolean;
-
-    constructor(config: WidgetConfig) {
-        this.widgetConfig = config;
-        this.stationService = new StationService(this.widgetConfig.apiBase);
-        this.obtainHtmlElement();
-        this.htmlElement.classList.add("aq-widget");
-
-        this.isLoading = true;
-        this.isInitialized = false;
-        this.isInfoOpened = false;
+    constructor() {
+        super();
+        this.setState({
+            isLoading: true,
+            isInitialized: false,
+            isInfoOpened: false,
+            station: null,
+            stationLookupResult: null,
+        });
     }
 
-    public async initialize() {
-        this.render();
-        console.log("initialize()", this.widgetConfig.elementId);
-        const lookupResult = await this.stationService.lookupStation("eea", this.widgetConfig.location);
+    public async componentDidMount() {
+        console.log("componentDidMount()", this.props.elementId);
+        this.stationService = new StationService(this.props.apiBase);
+
+        const lookupResult = await this.stationService.lookupStation("eea", this.props.location);
 
         if (!lookupResult) {
-            this.stationLookupResult = null;
-            this.isInitialized = false;
-            this.isLoading = false;
-            console.warn(`No station near ${JSON.stringify(this.widgetConfig.location)} found.`);
+            this.setState({ ...this.state, stationLookupResult: null, isInitialized: false, isLoading: false });
+            console.warn(`No station near ${JSON.stringify(this.props.location)} found.`);
         } else {
-            this.stationLookupResult = lookupResult;
-            this.isInitialized = true;
-            this.isLoading = false;
-            console.info(`Found station nearby: ${JSON.stringify(this.stationLookupResult)}`);
+            this.setState({ ...this.state, stationLookupResult: lookupResult, isInitialized: true, isLoading: false });
         }
-        await this.sync();
+        this.sync();
         this.register();
     }
 
-    private async sync() {
-        console.log("sync()", this.widgetConfig.elementId);
-        if (this.isInitialized) {
-            await this.fetchData();
+    private sync() {
+        console.log("sync()", this.props.elementId);
+        if (this.state.isInitialized) {
+            this.fetchData();
         }
-        this.render();
     }
 
     private async fetchData() {
-        const lookupResult = this.stationLookupResult;
+        const lookupResult = this.state.stationLookupResult;
         const station = await this.stationService.getStation("eea", lookupResult.countryCode, lookupResult.stationId);
-        this.station = station;
+        this.setState({ ...this.state, station: station });
     }
 
-    private render() {
-        this.obtainHtmlElement();
-        const station = this.station;
+    public render(props: WidgetConfig, state: AqWidgetState) {
+        const background = this.getBackgroundClass();
 
-        if (this.isLoading) {
-            const content = '<p class="aq-widget-warning">Loading...</p>';
-            this.renderInContainer(content, "neutral");
+        return (
+            <div class={"aq-widget-container " + background}>
+                {!state.isInitialized && state.isLoading && this._renderLoading()}
+                {!state.isInitialized && !state.isLoading && this._renderNoStationAvailable()}
+                {state.isInitialized && this._renderAQ(state)}
+                {state.isInfoOpened && this._renderInfo()}
+                <span class="aq-widget-info-icon">i</span>
+                <span class="aq-widget-particle-1" />
+                <span class="aq-widget-particle-2" />
+                <span class="aq-widget-particle-3" />
+            </div>
+        );
+    }
+
+    private _renderAQ(state) {
+        if (!state.station) {
             return;
         }
-        if (!this.isLoading && !this.isInitialized) {
-            const content = '<p class="aq-widget-warning">No air quality station available...</p>';
-            this.renderInContainer(content, "neutral");
-            return;
-        }
 
+        const station = state.station;
         const locationString = formatLocation(station.location);
         const aqiString = formatScore(station.measurements);
-        const aqiScore = getScore(station.measurements);
-        const iconId = "aq-widget-logo-icon-" + Math.random() * 10000;
-        const iconElement = this.renderIcon(iconId);
-
-        const background = aqiScore < 0 ? "neutral" : aqiString.replace(" ", "-");
-        const showParticles = aqiScore < 2 && aqiScore >= 0;
-        const content =
-            '<p class="aq-widget-index">EU Common Air Quality Index</p>' +
-            '<p class="aq-widget-score">' +
-            aqiString +
-            "</p>" +
-            '<p class="aq-widget-location">' +
-            locationString +
-            "</p>" +
-            iconElement;
-        this.renderInContainer(content, background, showParticles);
-        if (iconElement) {
-            this.attachIconUrl(iconId, this.widgetConfig.iconUrl);
-        }
+        return (
+            <div>
+                <p class="aq-widget-index">EU Common Air Quality Index</p>
+                <p class="aq-widget-score">{aqiString}</p>
+                <p class="aq-widget-location">{locationString}</p>
+                {this._renderIcon()}
+            </div>
+        );
     }
 
-    private renderInContainer(inner: string, background: string, showParticles = false) {
-        const infoLinkId = "aq-widget-info-link-" + Math.random() * 10000;
-        this.htmlElement.innerHTML =
-            '<div class="aq-widget-container aq-widget-' +
-            background +
-            '">' +
-            (showParticles
-                ? '<span class="aq-widget-particle-1"></span>' +
-                  '<span class="aq-widget-particle-2"></span>' +
-                  '<span class="aq-widget-particle-3"></span>'
-                : "") +
-            inner +
-            '<span id="' +
-            infoLinkId +
-            '" class="aq-widget-info-icon">i</span>' +
-            (this.isInfoOpened ? this.renderInfo() : "") +
-            "</div>";
-        this.attachHtmlListener(infoLinkId, "click", this.toggleInfo.bind(this));
+    private _renderInfo() {
+        return (
+            <div class="aq-widget-info-box">
+                <span class="aq-widget-info-close-link">×</span>
+                <p>{JRC_NOTICE}</p>
+            </div>
+        );
     }
 
-    private renderInfo() {
-        return '<div class="aq-widget-info-box"><p>This application has been developed within the EOVALUE project, which has received funding from the European Union’s Horizon 2020 research and innovation programme. The JRC, or as the case may be the European Commission, shall not be held liable for any direct or indirect, incidental, consequential or other damages, including but not limited to the loss of data, loss of profits, or any other financial loss arising from the use of this application, or inability to use it, even if the JRC is notified of the possibility of such damages.</p></div>';
-    }
-
-    private renderIcon(iconId: string) {
-        const iconUrl = this.widgetConfig.iconUrl;
+    private _renderIcon() {
+        const iconUrl = this.props.iconUrl;
         if (iconUrl) {
-            return '<div class="aq-widget-logo-icon" id="' + iconId + '"></div>';
+            return <div class="aq-widget-logo-icon" style={{ backgroundImage: "url(" + iconUrl + ")" }} />;
         }
-        return "";
     }
 
-    private obtainHtmlElement() {
-        this.htmlElement = document.getElementById(this.widgetConfig.elementId);
+    private _renderLoading() {
+        return <p class="aq-widget-warning">Loading...</p>;
     }
 
-    private attachHtmlListener(elementId: string, type: string, listener: () => {}) {
-        document.getElementById(elementId).addEventListener(type, listener);
+    private _renderNoStationAvailable() {
+        return <p class="aq-widget-warning">No air quality station available...</p>;
     }
 
-    private attachIconUrl(elementId: string, iconUrl: string) {
-        document.getElementById(elementId).style.backgroundImage = "url('" + iconUrl + "')";
+    private getBackgroundClass() {
+        const classPrefix = "aq-widget-";
+        if (!this.state.station) {
+            return classPrefix + "neutral";
+        }
+        const station = this.state.station;
+        const aqiScore = station ? getScore(station.measurements) : -1;
+        const aqiString = formatScore(station.measurements);
+
+        if (aqiScore < 0) {
+            return classPrefix + "neutral";
+        }
+        return classPrefix + aqiString.replace(" ", "-");
     }
 
     private toggleInfo() {
-        this.isInfoOpened = !this.isInfoOpened;
-        this.render();
+        this.setState({ ...this.state, isInfoOpened: !this.state.isInfoOpened });
     }
 
     private register() {
@@ -204,6 +193,6 @@ export async function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
         return;
     }
 
-    const widget = new AQWidget(config);
-    await widget.initialize();
+    element.classList.add("aq-widget");
+    render(<AQWidget {...config} />, element);
 }
