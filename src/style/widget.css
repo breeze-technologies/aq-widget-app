@@ -82,13 +82,12 @@
 .aq-widget .aq-widget-container {
     position: relative;
     display: block;
+    overflow: hidden;
     width: 100%;
     max-width: 500px !important;
     min-height: 100px !important;
     border-radius: 4px;
     background-color: #fff;
-    overflow: auto;
-    background-image: radial-gradient(circle 150px at 80% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
 .aq-widget .aq-widget-container.aq-widget-neutral {
@@ -172,7 +171,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
     background-origin: content-box;
 }
 
@@ -209,13 +208,13 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    top: 40px;
-    right: 140px;
+    top: 0;
+    right: 0;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.2);
-    animation: ParticleMove1 30s ease infinite;
-    -webkit-animation: ParticleMove1 30s ease infinite;
-    animation-direction: alternate;
+    animation: ParticleMove1 60s linear infinite;
+    -webkit-animation: ParticleMove1 60s linear infinite;
+    animation-direction: normal;
     will-change: transform;
 }
 
@@ -224,13 +223,13 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    top: 28px;
-    right: 120px;
+    top: 0;
+    right: 0;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.5);
-    animation: ParticleMove2 30s ease infinite;
-    -webkit-animation: ParticleMove2 30s ease infinite;
-    animation-direction: alternate;
+    animation: ParticleMove2 120s linear infinite;
+    -webkit-animation: ParticleMove2 120s linear infinite;
+    animation-direction: normal;
     will-change: transform;
 }
 
@@ -239,39 +238,63 @@
     position: absolute;
     width: 12px;
     height: 12px;
-    top: 15px;
-    right: 96px;
+    top: 0;
+    right: 0;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.8);
-    animation: ParticleMove3 30s ease infinite;
-    -webkit-animation: ParticleMove3 30s ease infinite;
-    animation-direction: alternate;
+    animation: ParticleMove3 90s linear infinite;
+    -webkit-animation: ParticleMove3 90s linear infinite;
+    animation-direction: normal;
     will-change: transform;
 }
 
 @keyframes ParticleMove1 {
-    from {
-        transform: translate(50px, -38px);
+    0% {
+        transform: translate(-180px, 50px);
     }
-    to {
-        transform: translate(0px, 0px) rotate(90deg);
+    30% {
+        transform: translate(-120px, 00px) rotate(60deg);
+    }
+    60% {
+        transform: translate(-20px, 40px) rotate(90deg);
+    }
+    80% {
+        transform: translate(-90px, 60px) rotate(80deg);
+    }
+    100% {
+        transform: translate(-180px, 50px) rotate(90deg);
     }
 }
 
 @keyframes ParticleMove2 {
-    from {
-        transform: translate(30px, -22px);
+    0% {
+        transform: translate(-240px, 30px);
     }
-    to {
-        transform: translate(0px, 0px) rotate(90deg);
+    25% {
+        transform: translate(-130px, 50px) rotate(60deg);
+    }
+    60% {
+        transform: translate(-60px, 0px) rotate(90deg);
+    }
+    80% {
+        transform: translate(-140px, 50px) rotate(40deg);
+    }
+    100% {
+        transform: translate(-240px, 30px) rotate(80deg);
     }
 }
 
 @keyframes ParticleMove3 {
-    from {
-        transform: translate(5px, -7px);
+    0% {
+        transform: translate(-20px, 30px);
     }
-    to {
-        transform: translate(0px, 0px) rotate(90deg);
+    40% {
+        transform: translate(-150px, 0px) rotate(40deg);
+    }
+    60% {
+        transform: translate(-220px, 60px) rotate(90deg);
+    }
+    100% {
+        transform: translate(-20px, 30px) rotate(60deg);
     }
 }
