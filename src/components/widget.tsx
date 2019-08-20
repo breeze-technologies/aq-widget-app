@@ -5,6 +5,7 @@ import { WidgetConfig } from "../models/config";
 import { StationService } from "../services/stations";
 import { StationLookupResult, Station } from "../models/station";
 import { formatLocation, formatScore, getScore } from "../utils/formatters";
+import { logging } from "../utils/logging";
 import { JRC_NOTICE, REFRESH_INTERVAL } from "../constants";
 
 /** Instruct Babel to compile JSX **/
@@ -34,7 +35,6 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
     }
 
     public async componentDidMount() {
-        console.log("componentDidMount()", this.props.elementId);
         this.toggleInfo = this.toggleInfo.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.intervalObj = setInterval(this.fetchData, REFRESH_INTERVAL);
@@ -48,7 +48,7 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
 
         if (!lookupResult) {
             this.setState({ ...this.state, stationLookupResult: null, isInitialized: false, isLoading: false });
-            console.warn(`No station near ${JSON.stringify(this.props.location)} found.`);
+            logging.warn(`No station near ${JSON.stringify(this.props.location)} found.`);
         } else {
             this.setState({ ...this.state, stationLookupResult: lookupResult, isInitialized: true, isLoading: false });
             this.fetchData();
@@ -66,7 +66,6 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
     }
 
     public render(props: WidgetConfig, state: AqWidgetState) {
-        console.log("render()", this.props.elementId, state.isInitialized, state.isLoading);
         const background = this.getBackgroundClass();
 
         return (

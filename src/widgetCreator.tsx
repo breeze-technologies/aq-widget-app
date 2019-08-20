@@ -2,7 +2,7 @@
 import { render, h } from "preact";
 import { WidgetConfig } from "./models/config";
 import { DEFAULT_WIDGET_CONFIG } from "./defaults";
-import * as logging from "./utils/logging";
+import { logging } from "./utils/logging";
 import { isValidDataSource } from "./utils/validators";
 import { AqWidget } from "./components/widget";
 
@@ -47,5 +47,4 @@ export function createStationWidget(WidgetConfig: WidgetConfig) {
     element.classList.add("aq-widget");
     const component = render(<AqWidget {...config} />, element);
     REGISTERED_WIDGETS.push(component);
-    console.log("reg", REGISTERED_WIDGETS);
 }
