@@ -1,17 +1,11 @@
 "use strict";
-import { render, h, Component } from "preact";
-import { WidgetConfig } from "./models/config";
-import { DEFAULT_WIDGET_CONFIG } from "./defaults";
-import * as logging from "./utils/logging";
-import { isValidDataSource } from "./utils/validators";
+import { h, Component } from "preact";
+import { WidgetConfig } from "../models/config";
 
-import "./style/widget.css";
-import { StationService } from "./services/stations";
-import { StationLookupResult, Station } from "./models/station";
-import { formatLocation, formatScore, getScore } from "./utils/formatters";
-import { JRC_NOTICE } from "./constants";
-
-const REGISTERED_WIDGETS = [];
+import { StationService } from "../services/stations";
+import { StationLookupResult, Station } from "../models/station";
+import { formatLocation, formatScore, getScore } from "../utils/formatters";
+import { JRC_NOTICE, REFRESH_INTERVAL } from "../constants";
 
 /** Instruct Babel to compile JSX **/
 /** @jsx h */
@@ -24,7 +18,7 @@ interface AqWidgetState {
     isInfoOpened: boolean;
 }
 
-class AQWidget extends Component<WidgetConfig, AqWidgetState> {
+export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
     private intervalObj: any;
     private stationService: StationService;
 
@@ -41,8 +35,15 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
 
     public async componentDidMount() {
         console.log("componentDidMount()", this.props.elementId);
+        this.toggleInfo = this.toggleInfo.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+        this.intervalObj = setInterval(this.fetchData, REFRESH_INTERVAL);
         this.stationService = new StationService(this.props.apiBase);
 
+        this.lookupAndInitStation();
+    }
+
+    private async lookupAndInitStation() {
         const lookupResult = await this.stationService.lookupStation("eea", this.props.location);
 
         if (!lookupResult) {
@@ -50,25 +51,22 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
             console.warn(`No station near ${JSON.stringify(this.props.location)} found.`);
         } else {
             this.setState({ ...this.state, stationLookupResult: lookupResult, isInitialized: true, isLoading: false });
-        }
-        this.sync();
-        this.register();
-    }
-
-    private sync() {
-        console.log("sync()", this.props.elementId);
-        if (this.state.isInitialized) {
             this.fetchData();
         }
     }
 
     private async fetchData() {
+        if (!this.state.isInitialized) {
+            return;
+        }
+        this.setLoading(true);
         const lookupResult = this.state.stationLookupResult;
         const station = await this.stationService.getStation("eea", lookupResult.countryCode, lookupResult.stationId);
-        this.setState({ ...this.state, station: station });
+        this.setState({ ...this.state, station: station, isLoading: false });
     }
 
     public render(props: WidgetConfig, state: AqWidgetState) {
+        console.log("render()", this.props.elementId, state.isInitialized, state.isLoading);
         const background = this.getBackgroundClass();
 
         return (
@@ -77,7 +75,9 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
                 {!state.isInitialized && !state.isLoading && this._renderNoStationAvailable()}
                 {state.isInitialized && this._renderAQ(state)}
                 {state.isInfoOpened && this._renderInfo()}
-                <span class="aq-widget-info-icon">i</span>
+                <span class="aq-widget-info-icon" onClick={this.toggleInfo}>
+                    i
+                </span>
                 <span class="aq-widget-particle-1" />
                 <span class="aq-widget-particle-2" />
                 <span class="aq-widget-particle-3" />
@@ -85,7 +85,7 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
         );
     }
 
-    private _renderAQ(state) {
+    private _renderAQ(state: AqWidgetState) {
         if (!state.station) {
             return;
         }
@@ -106,7 +106,9 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
     private _renderInfo() {
         return (
             <div class="aq-widget-info-box">
-                <span class="aq-widget-info-close-link">×</span>
+                <span class="aq-widget-info-close-link" onClick={this.toggleInfo}>
+                    ×
+                </span>
                 <p>{JRC_NOTICE}</p>
             </div>
         );
@@ -142,57 +144,15 @@ class AQWidget extends Component<WidgetConfig, AqWidgetState> {
         return classPrefix + aqiString.replace(" ", "-");
     }
 
-    private toggleInfo() {
+    setLoading(loading: boolean) {
+        this.setState({ ...this.state, isLoading: loading });
+    }
+
+    toggleInfo() {
         this.setState({ ...this.state, isInfoOpened: !this.state.isInfoOpened });
     }
 
-    private register() {
-        REGISTERED_WIDGETS.push(this);
-        this.intervalObj = setInterval(this.sync, 30000);
-    }
-
-    public unregister() {
+    componentWillUnmount() {
         clearInterval(this.intervalObj);
-        for (var i = 0; i < REGISTERED_WIDGETS.length; i++) {
-            if (REGISTERED_WIDGETS[i] === this) {
-                REGISTERED_WIDGETS.splice(i, 1);
-                break;
-            }
-        }
     }
-}
-
-export async function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
-    if (!WidgetConfig) {
-        logging.error("No widget config given.");
-        return;
-    }
-
-    const config = { ...DEFAULT_WIDGET_CONFIG };
-    for (const field of Object.keys(config)) {
-        if (WidgetConfig[field]) {
-            config[field] = WidgetConfig[field];
-        }
-    }
-
-    const element = document.getElementById(config.elementId);
-    if (!element) {
-        logging.error(`The given element ID "${config.elementId}" does not exist.`);
-        return;
-    }
-
-    const dataSource = config.dataSource;
-    if (!isValidDataSource(dataSource)) {
-        logging.error(`The given data source "${dataSource}" is not valid.`);
-        return;
-    }
-
-    const location = config.location;
-    if (!location || !location.longitude || !location.latitude) {
-        logging.error(`No valid location "${location}" given.`);
-        return;
-    }
-
-    element.classList.add("aq-widget");
-    render(<AQWidget {...config} />, element);
 }
