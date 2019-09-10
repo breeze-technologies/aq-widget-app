@@ -7,6 +7,7 @@ import { StationLookupResult, Station } from "../models/station";
 import { formatLocation, formatScore, getScore } from "../utils/formatters";
 import { logging } from "../utils/logging";
 import { JRC_NOTICE, REFRESH_INTERVAL } from "../constants";
+import moment from "moment";
 
 /** Instruct Babel to compile JSX **/
 /** @jsx h */
@@ -95,7 +96,10 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
         return (
             <div>
                 <p class="aq-widget-index">EU Common Air Quality Index</p>
-                <p class="aq-widget-score">{aqiString}</p>
+                <p class="aq-widget-score">
+                    {aqiString}
+                    <span class="aq-widget-time-ago"> {this.getTimeAgoText(station)}</span>
+                </p>
                 <p class="aq-widget-location">{locationString}</p>
                 {this._renderIcon()}
             </div>
@@ -108,6 +112,8 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
                 <span class="aq-widget-info-close-link" onClick={this.toggleInfo}>
                     ×
                 </span>
+                <p>Created with ❤️ at Breeze Technologies</p>
+                <hr />
                 <p>{JRC_NOTICE}</p>
             </div>
         );
@@ -141,6 +147,14 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
             return classPrefix + "neutral";
         }
         return classPrefix + aqiString.replace(" ", "-");
+    }
+
+    private getTimeAgoText(station: Station) {
+        if (!station || !station.measurements || station.measurements.length < 1) {
+            return "";
+        }
+        const dateEnd = moment.utc(station.measurements[0].dateEnd);
+        return dateEnd.calendar();
     }
 
     setLoading(loading: boolean) {

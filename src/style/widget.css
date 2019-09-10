@@ -137,6 +137,18 @@
     margin: 2px 0 0 10px;
 }
 
+.aq-widget .aq-widget-container .aq-widget-time-ago {
+    font-size: 10px;
+    text-transform: lowercase;
+    color: #fff;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+}
+
+.aq-widget .aq-widget-container:hover .aq-widget-time-ago {
+    opacity: 1;
+}
+
 .aq-widget .aq-widget-info-icon {
     display: block;
     position: absolute;
