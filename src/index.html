@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Breeze Widget Test</title>
+        <title>AQ Widget Test</title>
         <style type="text/css">
             body {
                 background: #ccc;
@@ -30,12 +30,35 @@
     </head>
     <body>
         <div id="wrapper">
-            <h1>Breeze Widget Test</h1>
+            <h1>AQ Widget Test</h1>
             <aside id="sidebar">
-                <div id="breeze_widget"></div>
                 <script src="widget.js"></script>
                 <script>
-                    BreezeWidget.createSingleSensorWidget({ sensorId: 123, elementId: "breeze_widget" });
+                    const locations = [
+                        [8.569405000000001, 53.562455],
+                        [16.528059990999996, 47.839989999465924],
+                        [17.9126, 44.19899993999999],
+                        [15, 45],
+                        [11.4257541, 48.7665351],
+                        [7.593275, 47.566634],
+                    ];
+                    const iconUrls = [
+                        null,
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/DEU_Hamburg_COA.svg/220px-DEU_Hamburg_COA.svg.png",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Coat_of_arms_of_Berlin.svg/2000px-Coat_of_arms_of_Berlin.svg.png",
+                    ];
+                    const locationCount = locations.length;
+                    const sidebar = document.getElementById("sidebar");
+                    for (let i = 0; i < locationCount; i++) {
+                        sidebar.innerHTML = sidebar.innerHTML + '<div id="aq_widget_' + i + '"></div><br>';
+                    }
+                    for (let i = 0; i < locationCount; i++) {
+                        AQWidget.createStationWidget({
+                            location: { longitude: locations[i][0], latitude: locations[i][1] },
+                            elementId: "aq_widget_" + i,
+                            iconUrl: iconUrls[i % iconUrls.length],
+                        });
+                    }
                 </script>
             </aside>
             <div id="content">
@@ -56,6 +79,7 @@
                     et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
                 </p>
             </div>
+            <div style="clear:both;"></div>
         </div>
     </body>
 </html>

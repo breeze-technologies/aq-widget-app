@@ -1,0 +1,311 @@
+/*** RESET ***/
+
+.aq-widget,
+.aq-widget div,
+.aq-widget span,
+.aq-widget applet,
+.aq-widget object,
+.aq-widget iframe,
+.aq-widget h1,
+.aq-widget h2,
+.aq-widget h3,
+.aq-widget h4,
+.aq-widget h5,
+.aq-widget h6,
+.aq-widget p,
+.aq-widget blockquote,
+.aq-widget pre,
+.aq-widget a,
+.aq-widget abbr,
+.aq-widget acronym,
+.aq-widget address,
+.aq-widget big,
+.aq-widget cite,
+.aq-widget code,
+.aq-widget del,
+.aq-widget dfn,
+.aq-widget em,
+.aq-widget font,
+.aq-widget img,
+.aq-widget ins,
+.aq-widget kbd,
+.aq-widget q,
+.aq-widget s,
+.aq-widget samp,
+.aq-widget small,
+.aq-widget strike,
+.aq-widget strong,
+.aq-widget sub,
+.aq-widget sup,
+.aq-widget tt,
+.aq-widget var,
+.aq-widget dl,
+.aq-widget dt,
+.aq-widget dd,
+.aq-widget ol,
+.aq-widget ul,
+.aq-widget li,
+.aq-widget fieldset,
+.aq-widget form,
+.aq-widget label,
+.aq-widget legend,
+.aq-widget table,
+.aq-widget caption,
+.aq-widget tbody,
+.aq-widget tfoot,
+.aq-widget thead,
+.aq-widget tr,
+.aq-widget th,
+.aq-widget td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.aq-widget :focus {
+    outline: 0;
+}
+
+/*** WIDGET ***/
+
+.aq-widget .aq-widget-container {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px !important;
+    min-height: 100px !important;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.aq-widget .aq-widget-container.aq-widget-neutral {
+    background-color: #b1b1b1;
+}
+.aq-widget .aq-widget-container.aq-widget-excellent {
+    background-color: #2fc3ff;
+}
+.aq-widget .aq-widget-container.aq-widget-fine {
+    background-color: #3ea5e6;
+}
+.aq-widget .aq-widget-container.aq-widget-moderate {
+    background-color: #4d87cd;
+}
+.aq-widget .aq-widget-container.aq-widget-poor {
+    background-color: #5c6ab4;
+}
+.aq-widget .aq-widget-container.aq-widget-very-poor {
+    background-color: #c773c1;
+}
+.aq-widget .aq-widget-container.aq-widget-severe {
+    background-color: #7a2f83;
+}
+
+.aq-widget .aq-widget-container .aq-widget-index {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+
+.aq-widget .aq-widget-container .aq-widget-warning {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 10px 0 0 10px;
+}
+
+.aq-widget .aq-widget-container .aq-widget-score {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 30px 0 0 10px;
+}
+
+.aq-widget .aq-widget-container .aq-widget-location {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 2px 0 0 10px;
+}
+
+.aq-widget .aq-widget-container .aq-widget-time-ago {
+    font-size: 10px;
+    text-transform: lowercase;
+    color: #fff;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+}
+
+.aq-widget .aq-widget-container:hover .aq-widget-time-ago {
+    opacity: 1;
+}
+
+.aq-widget .aq-widget-info-icon {
+    display: block;
+    position: absolute;
+    color: #fff;
+    width: 14px;
+    height: 14px;
+    bottom: 4px;
+    right: 4px;
+    border-radius: 7px;
+    border: 1px solid #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
+    font-family: Times, serif;
+    cursor: pointer;
+}
+
+.aq-widget .aq-widget-logo-icon {
+    position: absolute;
+    display: block;
+    width: 80px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.15);
+    background-origin: content-box;
+}
+
+.aq-widget .aq-widget-info-box {
+    position: absolute;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    padding: 24px 8px 12px;
+    left: 4px;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: #fff;
+    overflow: scroll;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+.aq-widget .aq-widget-info-close-link {
+    position: absolute;
+    cursor: pointer;
+    right: 20px;
+    top: 5px;
+    font-size: 20px;
+}
+
+.aq-widget .aq-widget-info-box p {
+    text-align: justify;
+}
+
+/*** PARTICLES ***/
+
+.aq-widget .aq-widget-container .aq-widget-particle-1 {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    right: 0;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: ParticleMove1 60s linear infinite;
+    -webkit-animation: ParticleMove1 60s linear infinite;
+    animation-direction: normal;
+    will-change: transform;
+}
+
+.aq-widget .aq-widget-container .aq-widget-particle-2 {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    right: 0;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: ParticleMove2 120s linear infinite;
+    -webkit-animation: ParticleMove2 120s linear infinite;
+    animation-direction: normal;
+    will-change: transform;
+}
+
+.aq-widget .aq-widget-container .aq-widget-particle-3 {
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 0;
+    right: 0;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    animation: ParticleMove3 90s linear infinite;
+    -webkit-animation: ParticleMove3 90s linear infinite;
+    animation-direction: normal;
+    will-change: transform;
+}
+
+@keyframes ParticleMove1 {
+    0% {
+        transform: translate(-180px, 50px);
+    }
+    30% {
+        transform: translate(-120px, 00px) rotate(60deg);
+    }
+    60% {
+        transform: translate(-20px, 40px) rotate(90deg);
+    }
+    80% {
+        transform: translate(-90px, 60px) rotate(80deg);
+    }
+    100% {
+        transform: translate(-180px, 50px) rotate(90deg);
+    }
+}
+
+@keyframes ParticleMove2 {
+    0% {
+        transform: translate(-240px, 30px);
+    }
+    25% {
+        transform: translate(-130px, 50px) rotate(60deg);
+    }
+    60% {
+        transform: translate(-60px, 0px) rotate(90deg);
+    }
+    80% {
+        transform: translate(-140px, 50px) rotate(40deg);
+    }
+    100% {
+        transform: translate(-240px, 30px) rotate(80deg);
+    }
+}
+
+@keyframes ParticleMove3 {
+    0% {
+        transform: translate(-20px, 30px);
+    }
+    40% {
+        transform: translate(-150px, 0px) rotate(40deg);
+    }
+    60% {
+        transform: translate(-220px, 60px) rotate(90deg);
+    }
+    100% {
+        transform: translate(-20px, 30px) rotate(60deg);
+    }
+}

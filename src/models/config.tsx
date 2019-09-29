@@ -1,7 +1,9 @@
+import { Location } from "./location";
+
 export interface WidgetConfig {
     dataSource: string;
-    sensorIdentifier: string;
+    location: Location;
     elementId: string;
-    showDetails: boolean;
-    interactive: boolean;
+    apiBase: string;
+    iconUrl: string;
 }

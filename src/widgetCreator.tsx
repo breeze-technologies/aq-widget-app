@@ -1,17 +1,25 @@
 "use strict";
-
+import { render, h } from "preact";
 import { WidgetConfig } from "./models/config";
 import { DEFAULT_WIDGET_CONFIG } from "./defaults";
-import * as logging from "./utils/logging";
+import { logging } from "./utils/logging";
 import { isValidDataSource } from "./utils/validators";
+import { AqWidget } from "./components/widget";
 
-export function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
+import "./style/widget.css";
+
+/** Instruct Babel to compile JSX **/
+/** @jsx h */
+
+const REGISTERED_WIDGETS = [];
+
+export function createStationWidget(WidgetConfig: WidgetConfig) {
     if (!WidgetConfig) {
         logging.error("No widget config given.");
         return;
     }
 
-    const config = DEFAULT_WIDGET_CONFIG;
+    const config = { ...DEFAULT_WIDGET_CONFIG };
     for (const field of Object.keys(config)) {
         if (WidgetConfig[field]) {
             config[field] = WidgetConfig[field];
@@ -30,11 +38,13 @@ export function createSingleSensorWidget(WidgetConfig: WidgetConfig) {
         return;
     }
 
-    const sensorIdentifier = config.sensorIdentifier;
-    if (!sensorIdentifier) {
-        logging.error(`No sensor identifier "${sensorIdentifier}" given.`);
+    const location = config.location;
+    if (!location || !location.longitude || !location.latitude) {
+        logging.error(`No valid location "${location}" given.`);
         return;
     }
 
-    element.innerHTML = '<div style="width:100%;height:100px;background:#2fc3ff;border-radius:4px;"></div>';
+    element.classList.add("aq-widget");
+    const component = render(<AqWidget {...config} />, element);
+    REGISTERED_WIDGETS.push(component);
 }

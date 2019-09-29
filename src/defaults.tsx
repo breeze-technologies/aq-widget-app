@@ -1,9 +1,9 @@
 import { WidgetConfig } from "./models/config";
 
 export const DEFAULT_WIDGET_CONFIG: WidgetConfig = {
-    dataSource: "breeze",
-    sensorIdentifier: "ND00028BD",
-    elementId: "breeze-widget",
-    showDetails: false,
-    interactive: false,
+    dataSource: "eea",
+    location: null,
+    elementId: "aq-widget",
+    apiBase: "",
+    iconUrl: null,
 };

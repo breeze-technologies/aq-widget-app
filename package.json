@@ -5,37 +5,41 @@
     "private": true,
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "watch": "webpack --watch --mode=\"development\"",
-        "start": "webpack-dev-server --open",
-        "build": "webpack"
+        "watch": "webpack --watch --mode=\"development\" --config webpack.dev.js",
+        "start": "webpack-dev-server --open --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/breeze-technologies/aq-widget-app.git"
     },
     "author": "Breeze Technologies",
-    "license": "UNLICENSED",
+    "license": "EUPL-1.2",
     "bugs": {
         "url": "https://github.com/breeze-technologies/aq-widget-app/issues"
     },
     "homepage": "https://github.com/breeze-technologies/aq-widget-app#readme",
     "devDependencies": {
-        "@babel/cli": "^7.5.0",
-        "@babel/core": "^7.5.0",
-        "@babel/preset-env": "^7.5.0",
-        "@babel/preset-typescript": "^7.3.3",
-        "babel-loader": "^8.0.6",
-        "copy-webpack-plugin": "^5.0.3",
-        "css-loader": "^3.0.0",
-        "source-map-loader": "^0.2.4",
-        "style-loader": "^0.23.1",
-        "typescript": "^3.5.2",
-        "webpack": "^4.35.2",
-        "webpack-cli": "^3.3.5",
-        "webpack-dev-server": "^3.7.2"
+        "@babel/cli": "7.5.5",
+        "@babel/core": "7.5.5",
+        "@babel/preset-env": "7.5.5",
+        "@babel/preset-typescript": "7.3.3",
+        "babel-loader": "8.0.6",
+        "copy-webpack-plugin": "5.0.4",
+        "css-loader": "3.2.0",
+        "source-map-loader": "0.2.4",
+        "style-loader": "0.23.1",
+        "typescript": "3.5.3",
+        "webpack": "4.39.1",
+        "webpack-cli": "3.3.6",
+        "webpack-dev-server": "3.7.2",
+        "webpack-merge": "^4.2.2"
     },
     "dependencies": {
-        "@babel/polyfill": "^7.4.4",
-        "lodash": "^4.17.11"
+        "@babel/plugin-transform-react-jsx": "7.3.0",
+        "@babel/polyfill": "7.4.4",
+        "axios": "0.19.0",
+        "moment": "2.24.0",
+        "preact": "8.5.2"
     }
 }

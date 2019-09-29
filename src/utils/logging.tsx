@@ -1,13 +1,17 @@
-const loggingPrefix = "[BreezeWidget]";
+const loggingPrefix = "[AQWidget]";
 
-export function error(...args: any[]){
-    console.error(loggingPrefix, ...args)
+class Logger {
+    error(...args: any[]) {
+        console.error(loggingPrefix, ...args);
+    }
+
+    warn(...args: any[]) {
+        console.warn(loggingPrefix, ...args);
+    }
+
+    info(...args: any[]) {
+        console.info(loggingPrefix, ...args);
+    }
 }
 
-export function warn(...args: any[]){
-    console.warn(loggingPrefix, ...args)
-}
-
-export function info(...args: any[]){
-    console.info(loggingPrefix, ...args)
-}
+export const logging = new Logger();
