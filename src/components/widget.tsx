@@ -68,19 +68,26 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
 
     public render(props: WidgetConfig, state: AqWidgetState) {
         const background = this.getBackgroundClass();
+        const isInitializing = !state.isInitialized && state.isLoading;
+        const isNoStationAvailable = !state.isInitialized && !state.isLoading;
+        const { isInitialized, isInfoOpened } = state;
 
         return (
             <div class={"aq-widget-container " + background}>
-                {!state.isInitialized && state.isLoading && this._renderLoading()}
-                {!state.isInitialized && !state.isLoading && this._renderNoStationAvailable()}
-                {state.isInitialized && this._renderAQ(state)}
-                {state.isInfoOpened && this._renderInfo()}
+                {isInitializing && this._renderLoading()}
+                {isNoStationAvailable && this._renderNoStationAvailable()}
+                {isInitialized && this._renderAQ(state)}
+                {isInfoOpened && this._renderInfo()}
                 <span class="aq-widget-info-icon" onClick={this.toggleInfo}>
                     i
                 </span>
-                <span class="aq-widget-particle-1" />
-                <span class="aq-widget-particle-2" />
-                <span class="aq-widget-particle-3" />
+                {!isNoStationAvailable && (
+                    <span>
+                        <span class="aq-widget-particle-1" />
+                        <span class="aq-widget-particle-2" />
+                        <span class="aq-widget-particle-3" />
+                    </span>
+                )}
             </div>
         );
     }
