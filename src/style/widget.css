@@ -117,7 +117,7 @@
 }
 
 .aq-widget .aq-widget-container .aq-widget-warning {
-    font-size: 10px;
+    font-size: 13px;
     text-transform: uppercase;
     color: #fff;
     margin: 10px 0 0 10px;
@@ -142,7 +142,7 @@
     text-transform: lowercase;
     color: #fff;
     opacity: 0;
-    transition: opacity .2s ease-out;
+    transition: opacity 0.2s ease-out;
 }
 
 .aq-widget .aq-widget-container:hover .aq-widget-time-ago {
@@ -189,7 +189,7 @@
     z-index: 1000;
     width: auto;
     height: auto;
-    padding: 24px 8px 12px;
+    padding: 12px 24px 12px 8px;
     left: 4px;
     top: 4px;
     right: 4px;
@@ -197,7 +197,12 @@
     background: #fff;
     overflow: scroll;
     border-radius: 2px;
-    font-size: 11px;
+    font-size: 9px;
+}
+
+.aq-widget .aq-widget-info-box hr {
+    border: 0 none;
+    border-top: 1px solid #ccc;
 }
 
 .aq-widget .aq-widget-info-close-link {
