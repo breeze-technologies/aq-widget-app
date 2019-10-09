@@ -24,6 +24,10 @@ module.exports = {
                 use: ["source-map-loader"],
                 enforce: "pre",
             },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: ["file-loader"],
+            },
         ],
     },
     resolve: {
