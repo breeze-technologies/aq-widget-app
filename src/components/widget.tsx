@@ -6,7 +6,10 @@ import { StationService } from "../services/stations";
 import { StationLookupResult, Station } from "../models/station";
 import { formatLocation, formatScore, getScore } from "../utils/formatters";
 import { logging } from "../utils/logging";
-import { JRC_NOTICE, REFRESH_INTERVAL } from "../constants";
+import { JRC_NOTICE, REFRESH_INTERVAL, BREEZE_NOTICE, BREEZE_WEBSITE } from "../constants";
+import BreezeLogo from "../assets/breeze-logo.png";
+import EcJrcLogo from "../assets/ec-jrc-logo.jpg";
+import EovalueLogo from "../assets/eovalue-logo.jpg";
 import moment from "moment";
 
 /** Instruct Babel to compile JSX **/
@@ -119,9 +122,20 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
                 <span class="aq-widget-info-close-link" onClick={this.toggleInfo}>
                     ×
                 </span>
-                <p>Created with ❤️ at Breeze Technologies</p>
+                <p style={{ textAlign: "center" }}>
+                    <a href={BREEZE_WEBSITE} target="_blank">
+                        <img src={BreezeLogo} />
+                    </a>
+                    <br />
+                    {BREEZE_NOTICE}
+                </p>
                 <hr />
-                <p>{JRC_NOTICE}</p>
+                <p>
+                    <img src={EcJrcLogo} style={{ float: "left", marginRight: "4px" }} />
+                    <br />
+                    <img src={EovalueLogo} style={{ float: "left", marginRight: "4px" }} />
+                    {JRC_NOTICE}
+                </p>
             </div>
         );
     }
