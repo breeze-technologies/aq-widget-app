@@ -6,7 +6,7 @@ import { StationService } from "../services/stations";
 import { StationLookupResult, Station } from "../models/station";
 import { formatLocation, formatScore, getScore } from "../utils/formatters";
 import { logging } from "../utils/logging";
-import { JRC_NOTICE, REFRESH_INTERVAL, BREEZE_NOTICE, BREEZE_WEBSITE } from "../constants";
+import { JRC_NOTICE, REFRESH_INTERVAL, BREEZE_NOTICE, BREEZE_WEBSITE, BREEZE_NAME } from "../constants";
 import BreezeLogo from "../assets/breeze-logo.png";
 import EcJrcLogo from "../assets/ec-jrc-logo.jpg";
 import EovalueLogo from "../assets/eovalue-logo.jpg";
@@ -122,18 +122,21 @@ export class AqWidget extends Component<WidgetConfig, AqWidgetState> {
                 <span class="aq-widget-info-close-link" onClick={this.toggleInfo}>
                     ×
                 </span>
-                <p style={{ textAlign: "center" }}>
+                <p class="aq-widget-text-center">
                     <a href={BREEZE_WEBSITE} target="_blank">
                         <img src={BreezeLogo} />
                     </a>
                     <br />
-                    {BREEZE_NOTICE}
+                    {BREEZE_NOTICE}{" "}
+                    <a href={BREEZE_WEBSITE} target="_blank">
+                        {BREEZE_NAME}
+                    </a>
                 </p>
                 <hr />
                 <p>
-                    <img src={EcJrcLogo} style={{ float: "left", marginRight: "4px" }} />
+                    <img src={EcJrcLogo} class="aq-widget-ec-logo" />
                     <br />
-                    <img src={EovalueLogo} style={{ float: "left", marginRight: "4px" }} />
+                    <img src={EovalueLogo} class="aq-widget-ec-logo" />
                     {JRC_NOTICE}
                 </p>
             </div>

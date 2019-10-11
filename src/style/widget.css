@@ -197,12 +197,33 @@
     background: #fff;
     overflow: scroll;
     border-radius: 2px;
-    font-size: 9px;
+    font-size: 10px;
+    text-align: justify;
 }
 
 .aq-widget .aq-widget-info-box hr {
     border: 0 none;
     border-top: 1px solid #ccc;
+}
+
+.aq-widget .aq-widget-info-box a,
+.aq-widget .aq-widget-info-box a:active,
+.aq-widget .aq-widget-info-box a:visited {
+    color: #2fc3ff;
+    text-decoration: none;
+}
+
+.aq-widget .aq-widget-info-box a:hover {
+    text-decoration: underline;
+}
+
+.aq-widget .aq-widget-text-center {
+    text-align: center;
+}
+
+.aq-widget .aq-widget-ec-logo {
+    float: left;
+    margin-right: 4px;
 }
 
 .aq-widget .aq-widget-info-close-link {
@@ -211,10 +232,6 @@
     right: 20px;
     top: 5px;
     font-size: 20px;
-}
-
-.aq-widget .aq-widget-info-box p {
-    text-align: justify;
 }
 
 /*** PARTICLES ***/
